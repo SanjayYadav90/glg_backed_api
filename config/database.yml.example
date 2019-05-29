@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: <%= Rails.application.credentials.production[:db_password] %>
   socket: /var/run/mysqld/mysqld.sock
 
 production:
