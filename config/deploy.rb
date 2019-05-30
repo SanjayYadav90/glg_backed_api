@@ -48,7 +48,6 @@ end
 desc 'Restart passenger server'
 task :restart => :remote_environment do
   # invoke :set_sudo_password
-  invoke :'crontab:install'
   command %[sudo -A service nginx restart]
   command %[mkdir -p #{File.join(fetch(:current_path), 'tmp')}]
   command %[touch #{File.join(fetch(:current_path), 'tmp', 'restart.txt')}]
