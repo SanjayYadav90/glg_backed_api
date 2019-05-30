@@ -17,7 +17,7 @@ set :branch, set_branch
 set :rvm_use_path, "/home/#{fetch(:user)}/.rvm/scripts/rvm"
 set :ruby_version, "#{File.readlines(File.join(__dir__, '..', '.ruby-version')).first.strip}"
 set :gemset, "#{File.readlines(File.join(__dir__, '..', '.ruby-gemset')).first.strip}"
-set :shared_dirs, fetch(:shared_dirs, []).push('tmp', 'storage', 'tmp/pids')
+set :shared_dirs, fetch(:shared_dirs, []).push('tmp', 'storage')
 set :shared_files, fetch(:shared_file, []).push(
     'config/database.yml',
     'config/storage.yml',
@@ -36,11 +36,6 @@ task setup_yml: :remote_environment do
   Dir[File.join(__dir__, '*.yml.example')].each do |_path|
     command %[echo "#{IO.binread(_path)}" > "#{File.join(fetch(:deploy_to), 'shared/config', File.basename(_path, '.yml.example') +'.yml')}"]
   end
-end
-
-task setup_credentials: :remote_environment do
-  command %[echo "#{IO.binread(File.join(__dir__, 'master.key'))}" > "#{File.join(fetch(:deploy_to), 'shared/config', 'master.key')}"]
-  # command "export RAILS_MASTER_KEY=#{IO.binread(File.join(__dir__,'master.key'))}"
 end
 
 task set_sudo_password: :remote_environment do
@@ -75,9 +70,3 @@ task :deploy => :remote_environment do
   invoke :restart
 end
 
-# After fresh installation of mysql on server, follow steps -
-#   1. sudo mysql -u root
-#   2. ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new_password';
-#   3. sudo service mysql stop
-#   4. sudo service mysql start
-#   5. Now login mysql without sudo
