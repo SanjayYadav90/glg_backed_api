@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_130608) do
+ActiveRecord::Schema.define(version: 2019_05_31_131729) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 2019_05_31_130608) do
     t.index ["admin_user_id"], name: "index_categories_on_admin_user_id"
   end
 
+  create_table "cattle_breeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.string "title", limit: 70
+    t.text "description"
+    t.bigint "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_cattle_breeds_on_admin_user_id"
+  end
+
   create_table "cattle_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "admin_user_id"
     t.string "title", limit: 50
@@ -102,6 +112,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_130608) do
   end
 
   add_foreign_key "categories", "admin_users"
+  add_foreign_key "cattle_breeds", "admin_users"
   add_foreign_key "cattle_categories", "admin_users"
   add_foreign_key "products", "categories"
 end
