@@ -4,4 +4,5 @@ class AdminUser < ApplicationRecord
   	devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable, :trackable#, :confirmable
     has_many :categories
+    has_many :cattle_categories
 end
