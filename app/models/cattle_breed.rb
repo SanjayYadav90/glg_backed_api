@@ -1,3 +1,4 @@
 class CattleBreed < ApplicationRecord
-  belongs_to :admin_user
+  belongs_to :cattle_category
+  has_many :cattle_variants
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_131729) do
+ActiveRecord::Schema.define(version: 2019_05_31_133814) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(version: 2019_05_31_131729) do
   end
 
   create_table "cattle_breeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "admin_user_id"
+    t.bigint "cattle_category_id"
     t.string "title", limit: 70
     t.text "description"
     t.bigint "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_user_id"], name: "index_cattle_breeds_on_admin_user_id"
+    t.index ["cattle_category_id"], name: "index_cattle_breeds_on_cattle_category_id"
   end
 
   create_table "cattle_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(version: 2019_05_31_131729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_user_id"], name: "index_cattle_categories_on_admin_user_id"
+  end
+
+  create_table "cattle_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "cattle_breed_id"
+    t.string "title", limit: 70
+    t.text "description"
+    t.bigint "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cattle_breed_id"], name: "index_cattle_variants_on_cattle_breed_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -112,7 +122,8 @@ ActiveRecord::Schema.define(version: 2019_05_31_131729) do
   end
 
   add_foreign_key "categories", "admin_users"
-  add_foreign_key "cattle_breeds", "admin_users"
+  add_foreign_key "cattle_breeds", "cattle_categories"
   add_foreign_key "cattle_categories", "admin_users"
+  add_foreign_key "cattle_variants", "cattle_breeds"
   add_foreign_key "products", "categories"
 end
