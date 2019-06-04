@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_133814) do
+ActiveRecord::Schema.define(version: 2019_05_31_135030) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -77,6 +77,19 @@ ActiveRecord::Schema.define(version: 2019_05_31_133814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_user_id"], name: "index_cattle_categories_on_admin_user_id"
+  end
+
+  create_table "cattle_current_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", limit: 70
+    t.string "calf_gender", limit: 50
+    t.string "calf_live_status", limit: 50
+    t.datetime "date_of_delivery"
+    t.decimal "quantity", precision: 5, scale: 3, default: "0.0"
+    t.decimal "calf_consumption", precision: 5, scale: 3, default: "0.0"
+    t.text "description"
+    t.bigint "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cattle_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
