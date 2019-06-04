@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_135030) do
+ActiveRecord::Schema.define(version: 2019_06_04_131853) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -102,6 +102,25 @@ ActiveRecord::Schema.define(version: 2019_05_31_135030) do
     t.index ["cattle_breed_id"], name: "index_cattle_variants_on_cattle_breed_id"
   end
 
+  create_table "cattles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "cattle_category_id"
+    t.bigint "cattle_breed_id"
+    t.bigint "cattle_variant_id"
+    t.string "title", limit: 70
+    t.text "description"
+    t.datetime "purchase_date"
+    t.decimal "amount", precision: 7, scale: 2
+    t.string "tag_no"
+    t.bigint "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_cattles_on_admin_user_id"
+    t.index ["cattle_breed_id"], name: "index_cattles_on_cattle_breed_id"
+    t.index ["cattle_category_id"], name: "index_cattles_on_cattle_category_id"
+    t.index ["cattle_variant_id"], name: "index_cattles_on_cattle_variant_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "category_id"
     t.string "title"
@@ -138,5 +157,9 @@ ActiveRecord::Schema.define(version: 2019_05_31_135030) do
   add_foreign_key "cattle_breeds", "cattle_categories"
   add_foreign_key "cattle_categories", "admin_users"
   add_foreign_key "cattle_variants", "cattle_breeds"
+  add_foreign_key "cattles", "admin_users"
+  add_foreign_key "cattles", "cattle_breeds"
+  add_foreign_key "cattles", "cattle_categories"
+  add_foreign_key "cattles", "cattle_variants"
   add_foreign_key "products", "categories"
 end

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_user: one
+  cattle_category: one
+  cattle_breed: one
+  cattle_variant: one
+  title: MyString
+  description: MyText
+  purchase_date: 2019-06-04 18:48:53
+  amount: 9.99
+  tag_no: MyString
+  created_by: 
+
+two:
+  admin_user: two
+  cattle_category: two
+  cattle_breed: two
+  cattle_variant: two
+  title: MyString
+  description: MyText
+  purchase_date: 2019-06-04 18:48:53
+  amount: 9.99
+  tag_no: MyString
+  created_by: 
