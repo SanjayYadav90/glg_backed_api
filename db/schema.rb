@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "category_id"
+    t.bigint "cream_level_id"
     t.string "title"
     t.text "description"
     t.decimal "price", precision: 10
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
     t.string "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["cream_level_id"], name: "index_products_on_cream_level_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -180,5 +180,5 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
   add_foreign_key "cattles", "cattle_variants"
   add_foreign_key "cream_levels", "product_origins"
   add_foreign_key "product_origins", "categories"
-  add_foreign_key "products", "categories"
+  add_foreign_key "products", "cream_levels"
 end
