@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_131853) do
+ActiveRecord::Schema.define(version: 2019_06_05_110329) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 2019_06_04_131853) do
     t.index ["cattle_variant_id"], name: "index_cattles_on_cattle_variant_id"
   end
 
+  create_table "product_origins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "category_id"
+    t.string "title", limit: 70
+    t.text "description"
+    t.bigint "created_by"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_origins_on_category_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "category_id"
     t.string "title"
@@ -155,5 +166,6 @@ ActiveRecord::Schema.define(version: 2019_06_04_131853) do
   add_foreign_key "cattle_variants", "cattle_breeds"
   add_foreign_key "cattles", "admin_users"
   add_foreign_key "cattles", "cattle_variants"
+  add_foreign_key "product_origins", "categories"
   add_foreign_key "products", "categories"
 end
