@@ -104,8 +104,6 @@ ActiveRecord::Schema.define(version: 2019_06_04_131853) do
 
   create_table "cattles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "admin_user_id"
-    t.bigint "cattle_category_id"
-    t.bigint "cattle_breed_id"
     t.bigint "cattle_variant_id"
     t.string "title", limit: 70
     t.text "description"
@@ -116,8 +114,6 @@ ActiveRecord::Schema.define(version: 2019_06_04_131853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_user_id"], name: "index_cattles_on_admin_user_id"
-    t.index ["cattle_breed_id"], name: "index_cattles_on_cattle_breed_id"
-    t.index ["cattle_category_id"], name: "index_cattles_on_cattle_category_id"
     t.index ["cattle_variant_id"], name: "index_cattles_on_cattle_variant_id"
   end
 
@@ -158,8 +154,6 @@ ActiveRecord::Schema.define(version: 2019_06_04_131853) do
   add_foreign_key "cattle_categories", "admin_users"
   add_foreign_key "cattle_variants", "cattle_breeds"
   add_foreign_key "cattles", "admin_users"
-  add_foreign_key "cattles", "cattle_breeds"
-  add_foreign_key "cattles", "cattle_categories"
   add_foreign_key "cattles", "cattle_variants"
   add_foreign_key "products", "categories"
 end
