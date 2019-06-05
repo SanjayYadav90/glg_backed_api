@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  fat_level: 9.99
+  description: MyText
+  created_by: 
+  status: false
+
+two:
+  title: MyString
+  fat_level: 9.99
+  description: MyText
+  created_by: 
+  status: false
