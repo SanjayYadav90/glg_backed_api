@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_180129) do
+ActiveRecord::Schema.define(version: 2019_06_05_185009) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -140,6 +140,19 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
     t.index ["category_id"], name: "index_product_origins_on_category_id"
   end
 
+  create_table "product_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "title", limit: 110
+    t.decimal "quantity", precision: 10, scale: 3
+    t.string "batch_no"
+    t.datetime "used_by"
+    t.bigint "created_by"
+    t.boolean "status", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_variants_on_product_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "cream_level_id"
     t.string "title"
@@ -179,5 +192,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
   add_foreign_key "cattles", "cattle_variants"
   add_foreign_key "cream_levels", "product_origins"
   add_foreign_key "product_origins", "categories"
+  add_foreign_key "product_variants", "products"
   add_foreign_key "products", "cream_levels"
 end
