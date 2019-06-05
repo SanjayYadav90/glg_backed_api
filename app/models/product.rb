@@ -1,3 +1,3 @@
 class Product < ApplicationRecord
-  belongs_to :category
+  belongs_to :cream_level
 end

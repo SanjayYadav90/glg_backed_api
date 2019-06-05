@@ -144,7 +144,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
     t.bigint "cream_level_id"
     t.string "title"
     t.text "description"
-    t.decimal "price", precision: 10
     t.boolean "status"
     t.string "created_by"
     t.datetime "created_at", null: false
