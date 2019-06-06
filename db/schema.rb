@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_192329) do
+ActiveRecord::Schema.define(version: 2019_06_05_192347) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -168,14 +168,15 @@ ActiveRecord::Schema.define(version: 2019_06_05_192329) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "cream_level_id"
+    t.bigint "category_id"
     t.string "title"
     t.text "description"
+    t.decimal "price", precision: 10
     t.boolean "status"
     t.string "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cream_level_id"], name: "index_products_on_cream_level_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "servise_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -221,6 +222,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_192329) do
   add_foreign_key "prices", "servise_states"
   add_foreign_key "product_origins", "categories"
   add_foreign_key "product_variants", "products"
-  add_foreign_key "products", "cream_levels"
+  add_foreign_key "products", "categories"
   add_foreign_key "servise_states", "admin_users"
 end
