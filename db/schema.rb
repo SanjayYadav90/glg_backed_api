@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_180129) do
+ActiveRecord::Schema.define(version: 2019_06_05_192329) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -129,6 +129,20 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
     t.index ["product_origin_id"], name: "index_cream_levels_on_product_origin_id"
   end
 
+  create_table "prices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "servise_state_id"
+    t.string "title", limit: 110
+    t.decimal "price", precision: 7, scale: 2
+    t.text "description"
+    t.bigint "created_by"
+    t.boolean "status", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_prices_on_product_id"
+    t.index ["servise_state_id"], name: "index_prices_on_servise_state_id"
+  end
+
   create_table "product_origins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "category_id"
     t.string "title", limit: 70
@@ -140,16 +154,40 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
     t.index ["category_id"], name: "index_product_origins_on_category_id"
   end
 
+  create_table "product_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "title", limit: 110
+    t.decimal "quantity", precision: 10, scale: 3
+    t.string "batch_no"
+    t.datetime "used_by"
+    t.bigint "created_by"
+    t.boolean "status", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_variants_on_product_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "category_id"
+    t.bigint "cream_level_id"
     t.string "title"
     t.text "description"
-    t.decimal "price", precision: 10
     t.boolean "status"
     t.string "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["cream_level_id"], name: "index_products_on_cream_level_id"
+  end
+
+  create_table "servise_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.string "title", limit: 120
+    t.datetime "started_at"
+    t.text "remarks"
+    t.bigint "created_by"
+    t.boolean "status", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_servise_states_on_admin_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -179,6 +217,10 @@ ActiveRecord::Schema.define(version: 2019_06_05_180129) do
   add_foreign_key "cattles", "admin_users"
   add_foreign_key "cattles", "cattle_variants"
   add_foreign_key "cream_levels", "product_origins"
+  add_foreign_key "prices", "products"
+  add_foreign_key "prices", "servise_states"
   add_foreign_key "product_origins", "categories"
-  add_foreign_key "products", "categories"
+  add_foreign_key "product_variants", "products"
+  add_foreign_key "products", "cream_levels"
+  add_foreign_key "servise_states", "admin_users"
 end

@@ -1,8 +1,8 @@
-ActiveAdmin.register Product do
+ActiveAdmin.register ServiseState do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :cream_level_id, :title, :description, :status, :created_by
+permit_params :servise_state_id, :title, :started_at, :remarks, :created_by, :status
 #
 # or
 #
