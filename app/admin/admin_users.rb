@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  menu label: 'Admin User', parent: 'Profiles'
   permit_params :email, :password, :password_confirmation
 
   index do
