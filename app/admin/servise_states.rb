@@ -1,5 +1,6 @@
 ActiveAdmin.register ServiseState do
 
+  menu label: proc { I18n.t("admin.service.state.label") }
   permit_params :admin_user_id, :title, :started_at, :remarks, :created_by, :status
 
   index do

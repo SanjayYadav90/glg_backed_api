@@ -1,16 +1,50 @@
 ActiveAdmin.register User do
-	menu label: 'User', parent: 'Profiles'
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
 
+  menu priority: 2, label: proc { I18n.t("admin.users.user.label") }, parent: 'Profiles'
+
+  permit_params :salutaion, :first_name, :last_name, :gender, :email, :mobile, :password, :password_confirmation, :call_verified, :premimum, :status
+
+  index do
+    selectable_column
+    id_column
+    column :salutaion
+    column :first_name
+    column :last_name
+    column :gender
+    column :email
+    column :mobile
+    column :call_verified
+    column :premimum
+    column :status
+    column :created_at
+    column :updated_at
+    actions
+  end
+
+  filter :first_name
+  filter :last_name
+  filter :gender
+  filter :email
+  filter :mobile
+  filter :call_verified
+  filter :premimum
+  filter :created_at
+  filter :updated_at
+
+  form do |f|
+    f.inputs do
+      f.input :salutaion
+      f.input :first_name
+      f.input :last_name
+      f.input :gender
+      f.input :email
+      f.input :mobile
+      f.input :password
+      f.input :password_confirmation
+      f.input :call_verified
+      f.input :premimum
+      f.input :status
+    end
+    f.actions
+  end
 end

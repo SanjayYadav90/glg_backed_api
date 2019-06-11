@@ -23,3 +23,11 @@ en:
         label: "Cattle List"
       current_status:
         label: "Cattle Current Status"
+    service:
+      state:
+        label: "Service State"
+    users:
+      admin_user:
+        label: "Super Admin"
+      user:
+        label: "Users List"

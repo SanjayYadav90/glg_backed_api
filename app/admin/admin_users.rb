@@ -1,5 +1,6 @@
 ActiveAdmin.register AdminUser do
-  menu label: 'Admin User', parent: 'Profiles'
+
+  menu priority: 1, label: proc { I18n.t("admin.users.admin_user.label") }, parent: 'Profiles'
   permit_params :email, :password, :password_confirmation
 
   index do
