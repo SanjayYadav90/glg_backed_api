@@ -24,26 +24,28 @@ ActiveAdmin.register User do
   filter :first_name
   filter :last_name
   filter :gender
+  filter :gender, as: :select, collection: -> { GENDER } 
   filter :email
   filter :mobile
   filter :call_verified
   filter :premimum
+  filter :status, as: :select, collection: -> { USER_STATUS }
   filter :created_at
   filter :updated_at
 
   form do |f|
     f.inputs do
-      f.input :salutaion
+      f.input :salutaion, as: :select, :collection => SALUTATION
       f.input :first_name
       f.input :last_name
-      f.input :gender
+      f.input :gender, as: :select, :collection => GENDER
       f.input :email
       f.input :mobile
       f.input :password
       f.input :password_confirmation
       f.input :call_verified
       f.input :premimum
-      f.input :status
+      f.input :gender, as: :select, :collection => USER_STATUS
     end
     f.actions
   end
