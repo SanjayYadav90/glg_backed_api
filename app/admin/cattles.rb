@@ -1,6 +1,6 @@
 ActiveAdmin.register Cattle do
   
-  menu label: 'Cattle', parent: 'Cattle'
+  menu priority: 4, label: proc { I18n.t("admin.cattle.cattle_list.label") }, parent: 'Cattle'
 	
   permit_params :admin_user_id, :cattle_variant_id, :title, :description,  :purchase_date, :amount, :tag_no, :created_by
 

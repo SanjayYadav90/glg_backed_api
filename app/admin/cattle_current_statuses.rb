@@ -1,5 +1,6 @@
 ActiveAdmin.register CattleCurrentStatus do
-  menu label: 'Cattle Status', parent: 'Cattle'
+
+  menu priority: 5, label: proc { I18n.t("admin.cattle.current_status.label") }, parent: 'Cattle'
 
   permit_params :title, :calf_gender, :calf_live_status, :date_of_delivery, :quantity, :calf_consumption, :description, :created_by
 

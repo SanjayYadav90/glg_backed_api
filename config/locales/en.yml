@@ -2,11 +2,24 @@
 en:
   admin:
     products:
-      product:
-        label: "Products List"
       category:
-        label: "Category List"
+        label: "Categories List"
       origin:
         label: "Product Origins"
       variant:
         label: "Product Variants"
+      product:
+        label: "Products List"
+      cream_level:
+        label: "Cream Level"
+    cattle:
+      category:
+        label: "Cattle Categories"
+      breed:
+        label: "Cattle Breeds"
+      variant:
+        label: "Cattle Variants"
+      cattle_list:
+        label: "Cattle List"
+      current_status:
+        label: "Cattle Current Status"
