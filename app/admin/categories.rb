@@ -1,6 +1,8 @@
 ActiveAdmin.register Category do
 
-permit_params :title, :description, :admin_user_id, :created_by, :status
+  menu priority: 1, label: proc { I18n.t("admin.products.category.label") }, parent: 'Product'
+  
+  permit_params :title, :description, :admin_user_id, :created_by, :status
 
   index do
     selectable_column
