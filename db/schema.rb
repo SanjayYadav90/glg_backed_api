@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
   end
 
   create_table "cattle_current_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "cattle_id"
     t.string "title", limit: 70
     t.string "calf_gender", limit: 50
     t.string "calf_live_status", limit: 50
@@ -88,8 +89,10 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.decimal "calf_consumption", precision: 5, scale: 3, default: "0.0"
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cattle_id"], name: "index_cattle_current_statuses_on_cattle_id"
   end
 
   create_table "cattle_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -214,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
   add_foreign_key "categories", "admin_users"
   add_foreign_key "cattle_breeds", "cattle_categories"
   add_foreign_key "cattle_categories", "admin_users"
+  add_foreign_key "cattle_current_statuses", "cattles"
   add_foreign_key "cattle_variants", "cattle_breeds"
   add_foreign_key "cattles", "admin_users"
   add_foreign_key "cattles", "cattle_variants"
