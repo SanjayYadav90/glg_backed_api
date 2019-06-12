@@ -2,10 +2,10 @@ ActiveAdmin.register CattleCurrentStatus do
 
   menu priority: 5, label: proc { I18n.t("admin.cattle.current_status.label") }, parent: 'Cattle'
 
-  permit_params :title, :calf_gender, :calf_live_status, :date_of_delivery, :quantity, :calf_consumption, :description, :created_by
+  permit_params :cattle_id, :title, :calf_gender, :calf_live_status, :date_of_delivery, :quantity, :calf_consumption, :description, :created_by
 
   filter :title
-  # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  filter :cattle_id, as: :select, collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
   filter :calf_gender
   filter :calf_live_status
   filter :date_of_delivery
@@ -18,7 +18,7 @@ ActiveAdmin.register CattleCurrentStatus do
 
   form do |f|
     f.inputs do
-      # f.input :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+      f.input :cattle_id, as: :select, collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
       f.input :title
       f.input :calf_gender
       f.input :calf_live_status
