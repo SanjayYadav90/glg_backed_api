@@ -2,12 +2,12 @@ ActiveAdmin.register User do
 
   menu priority: 2, label: proc { I18n.t("admin.users.user.label") }, parent: 'Profiles'
 
-  permit_params :salutaion, :first_name, :last_name, :gender, :email, :mobile, :password, :password_confirmation, :call_verified, :premimum, :status
+  permit_params :salutation, :first_name, :last_name, :gender, :email, :mobile, :password, :password_confirmation, :call_verified, :premimum, :status
 
   index do
     selectable_column
     id_column
-    column :salutaion
+    column :salutation
     column :first_name
     column :last_name
     column :gender
@@ -35,7 +35,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs do
-      f.input :salutaion, as: :select, :collection => SALUTATION
+      f.input :salutation, as: :select, :collection => SALUTATION
       f.input :first_name
       f.input :last_name
       f.input :gender, as: :select, :collection => GENDER
