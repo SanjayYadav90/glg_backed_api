@@ -1,7 +1,7 @@
 class CreateCattleCurrentStatuses < ActiveRecord::Migration[5.2]
   def change
     create_table :cattle_current_statuses do |t|
-      t.references :cattle, foreign_key: true
+      t.bigint :cattle_id
       t.string :title, limit: 70
       t.string :calf_gender, limit: 50
       t.string :calf_live_status, limit: 50

@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
   end
 
   create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "service_state_id"
+    t.string "title"
     t.string "email", default: "", null: false
     t.string "role", default: "vendor", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,14 +51,14 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_user_id"
     t.string "title"
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status"
-    t.bigint "admin_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_user_id"], name: "index_categories_on_admin_user_id"
   end
 
   create_table "cattle_breeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -64,9 +66,9 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.string "title", limit: 70
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cattle_category_id"], name: "index_cattle_breeds_on_cattle_category_id"
   end
 
   create_table "cattle_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -74,9 +76,9 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.string "title", limit: 50
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_user_id"], name: "index_cattle_categories_on_admin_user_id"
   end
 
   create_table "cattle_current_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cattle_id"], name: "index_cattle_current_statuses_on_cattle_id"
   end
 
   create_table "cattle_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -100,9 +101,9 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.string "title", limit: 70
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cattle_breed_id"], name: "index_cattle_variants_on_cattle_breed_id"
   end
 
   create_table "cattles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -113,11 +114,11 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.datetime "purchase_date"
     t.decimal "amount", precision: 7, scale: 2
     t.string "tag_no"
+    t.bigint "parent_cattle_id"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_user_id"], name: "index_cattles_on_admin_user_id"
-    t.index ["cattle_variant_id"], name: "index_cattles_on_cattle_variant_id"
   end
 
   create_table "cream_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -126,24 +127,23 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.decimal "fat_level", precision: 5, scale: 2
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_origin_id"], name: "index_cream_levels_on_product_origin_id"
   end
 
   create_table "prices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id"
-    t.bigint "servise_state_id"
+    t.bigint "service_state_id"
     t.string "title", limit: 110
     t.decimal "price", precision: 7, scale: 2
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_prices_on_product_id"
-    t.index ["servise_state_id"], name: "index_prices_on_servise_state_id"
   end
 
   create_table "product_origins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -151,10 +151,10 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.string "title", limit: 70
     t.text "description"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_product_origins_on_category_id"
   end
 
   create_table "product_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -164,37 +164,38 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.string "batch_no"
     t.datetime "used_by"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_product_variants_on_product_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "category_id"
+    t.bigint "cream_level_id"
     t.string "title"
     t.text "description"
-    t.decimal "price", precision: 10
     t.boolean "status"
-    t.string "created_by"
+    t.bigint "created_by"
+    t.bigint "updated_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "servise_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "service_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "admin_user_id"
     t.string "title", limit: 120
     t.datetime "started_at"
     t.text "remarks"
     t.bigint "created_by"
+    t.bigint "updated_by"
     t.boolean "status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_user_id"], name: "index_servise_states_on_admin_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "service_state_id"
     t.string "salutation"
     t.string "first_name"
     t.string "last_name"
@@ -216,18 +217,4 @@ ActiveRecord::Schema.define(version: 2019_06_05_192335) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "categories", "admin_users"
-  add_foreign_key "cattle_breeds", "cattle_categories"
-  add_foreign_key "cattle_categories", "admin_users"
-  add_foreign_key "cattle_current_statuses", "cattles"
-  add_foreign_key "cattle_variants", "cattle_breeds"
-  add_foreign_key "cattles", "admin_users"
-  add_foreign_key "cattles", "cattle_variants"
-  add_foreign_key "cream_levels", "product_origins"
-  add_foreign_key "prices", "products"
-  add_foreign_key "prices", "servise_states"
-  add_foreign_key "product_origins", "categories"
-  add_foreign_key "product_variants", "products"
-  add_foreign_key "products", "categories"
-  add_foreign_key "servise_states", "admin_users"
 end

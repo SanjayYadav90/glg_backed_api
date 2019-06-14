@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ServiseStateTest < ActiveSupport::TestCase
+class ServiceStateTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

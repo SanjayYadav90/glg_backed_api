@@ -1,11 +1,12 @@
 class CreateProducts < ActiveRecord::Migration[5.2]
   def change
     create_table :products do |t|
-      t.references :cream_level, foreign_key: true
+      t.bigint :cream_level_id
       t.string :title
       t.text :description
       t.boolean :status
-      t.string :created_by
+      t.bigint :created_by
+      t.bigint :updated_by
 
       t.timestamps
     end
