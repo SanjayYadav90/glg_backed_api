@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
-      t.string :salutaion
+      t.string :salutation
       t.string :first_name
       t.string :last_name
       t.string :gender
@@ -16,6 +16,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
+      t.bigint   :created_by
+      t.bigint   :updated_by
 
       t.timestamps
     end
