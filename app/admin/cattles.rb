@@ -4,8 +4,8 @@ ActiveAdmin.register Cattle do
 	
   permit_params :admin_user_id, :cattle_variant_id, :title, :description,  :purchase_date, :amount, :tag_no, :created_by
 
-  filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
-  filter :cattle_variant_id, as: :select, collection: CattleVariant.all.collect {|c_var| [c_var.title, c_var.id] }
+  # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  # filter :cattle_variant_id, as: :select, collection: CattleVariant.all.collect {|c_var| [c_var.title, c_var.id] }
   filter :title
   filter :description
   filter :purchase_date

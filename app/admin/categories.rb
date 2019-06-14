@@ -17,7 +17,7 @@ ActiveAdmin.register Category do
   end
 
   filter :title
-  filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :created_by
   filter :status
   filter :created_at

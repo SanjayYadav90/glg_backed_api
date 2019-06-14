@@ -17,7 +17,7 @@ ActiveAdmin.register ServiceState do
     actions
   end
 
-  filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :title
   filter :started_at
   filter :remarks
