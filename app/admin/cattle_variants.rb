@@ -5,7 +5,7 @@ ActiveAdmin.register CattleVariant do
   permit_params :cattle_breed_id, :title, :description, :created_by
 
   filter :title
-  filter :cattle_breed_id, as: :select, collection: CattleBreed.all.collect {|c_breed| [c_breed.title, c_breed.id] }
+  # filter :cattle_breed_id, as: :select, collection: CattleBreed.all.collect {|c_breed| [c_breed.title, c_breed.id] }
   filter :description
   filter :created_by
   filter :created_at

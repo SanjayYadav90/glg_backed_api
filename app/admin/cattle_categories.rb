@@ -5,7 +5,7 @@ ActiveAdmin.register CattleCategory do
   permit_params :admin_user_id, :title, :description, :created_by
 
   filter :title
-  filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :description
   filter :created_by
   filter :created_at

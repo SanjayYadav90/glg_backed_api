@@ -18,7 +18,7 @@ ActiveAdmin.register Product do
     actions
   end
 
-  filter :category_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+  # filter :category_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :title
   filter :price
   filter :description

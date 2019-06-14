@@ -5,7 +5,7 @@ ActiveAdmin.register CattleCurrentStatus do
   permit_params :cattle_id, :title, :calf_gender, :calf_live_status, :date_of_delivery, :quantity, :calf_consumption, :description, :created_by
 
   filter :title
-  filter :cattle_id, as: :select, collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
+  # filter :cattle_id, as: :select, collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
   filter :calf_gender
   filter :calf_live_status
   filter :date_of_delivery
