@@ -1,4 +1,4 @@
 class Price < ApplicationRecord
   belongs_to :product
-  belongs_to :servise_state
+  belongs_to :service_state
 end

@@ -1,6 +1,8 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
+      t.bigint :admin_user_id
+      t.bigint :service_state_id
       t.string :salutation
       t.string :first_name
       t.string :last_name
