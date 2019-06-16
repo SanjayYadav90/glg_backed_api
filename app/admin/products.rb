@@ -9,7 +9,6 @@ ActiveAdmin.register Product do
     id_column
     column :cream_level_id
     column :title
-    column :price
     column :description
     column :status
     column :created_by
@@ -20,7 +19,6 @@ ActiveAdmin.register Product do
 
   # filter :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
   filter :title
-  filter :price
   filter :description
   filter :status
   filter :created_by

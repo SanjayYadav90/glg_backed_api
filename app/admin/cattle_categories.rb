@@ -4,6 +4,38 @@ ActiveAdmin.register CattleCategory do
 
   permit_params :admin_user_id, :title, :description, :created_by
 
+  index do
+    selectable_column
+    id_column
+    column :title
+    column "Description" do |desc|
+      desc.description.truncate_words(7)
+    end
+    column "Admin User" do |admin|
+      if admin.admin_user_id.present?
+        AdminUser.find(admin.admin_user_id)
+      else
+        "Nil"
+      end
+    end 
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end 
+    actions
+  end
+
   filter :title
   # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :description
