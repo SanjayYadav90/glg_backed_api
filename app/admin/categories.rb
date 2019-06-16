@@ -6,11 +6,41 @@ ActiveAdmin.register Category do
 
   index do
     selectable_column
-    id_column
-    column :title
-    column :description
-    column :created_by
-    column :admin_user_id
+    column "Title" do |t|
+      t.title.truncate_words(3)
+    end
+    column "Admin User" do |admin|
+      if admin.admin_user_id.present?
+        AdminUser.find(admin.admin_user_id)
+      else
+        "Nil"
+      end
+    end 
+    column "Description" do |desc|
+      desc.description.truncate_words(5)
+    end
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end 
+    # column "Status" do |sat|
+    #   if sat.status == true
+    #     I18n.t("status.active")
+    #   else
+    #     I18n.t("status.inactive")
+    #   end
+    # end
     column :status
     column :created_at
     actions
