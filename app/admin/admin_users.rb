@@ -6,6 +6,7 @@ ActiveAdmin.register AdminUser do
   index do
     selectable_column
     id_column
+    column :title
     column :email
     column :current_sign_in_at
     column :sign_in_count
@@ -13,6 +14,7 @@ ActiveAdmin.register AdminUser do
     actions
   end
 
+  filter :title
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
@@ -20,6 +22,7 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs do
+      f.input :title
       f.input :email
       f.input :password
       f.input :password_confirmation

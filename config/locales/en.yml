@@ -31,3 +31,6 @@ en:
         label: "Super Admin"
       user:
         label: "Users List"
+  status:
+      active: "Active"
+      inactive: "Inactive"

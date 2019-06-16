@@ -7,9 +7,8 @@ ActiveAdmin.register CattleCategory do
   index do
     selectable_column
     id_column
-    column :title
-    column "Description" do |desc|
-      desc.description.truncate_words(7)
+    column "Title" do |t|
+      t.title.truncate_words(3)
     end
     column "Admin User" do |admin|
       if admin.admin_user_id.present?
@@ -17,7 +16,10 @@ ActiveAdmin.register CattleCategory do
       else
         "Nil"
       end
-    end 
+    end
+    column "Description" do |desc|
+      desc.description.truncate_words(5)
+    end
     column "Created By" do |creat|
       if creat.created_by.present?
         admin = AdminUser.find(creat.created_by)
