@@ -2,7 +2,7 @@ ActiveAdmin.register CattleBreed do
   
   menu priority: 2, label: proc { I18n.t("admin.cattle.breed.label") }, parent: 'Cattle'
 
-  permit_params :cattle_category_id, :title, :description, :created_by
+  permit_params :cattle_category_id, :title, :created_by, :updated_by, :description
 
   index do
     selectable_column
@@ -43,6 +43,7 @@ ActiveAdmin.register CattleBreed do
   # filter :cattle_category_id, as: :select, collection: CattleCategory.all.collect {|c_cat| [c_cat.title, c_cat.id] }
   filter :description
   filter :created_by
+  filter :updated_by
   filter :created_at
   filter :updated_at
 
@@ -52,6 +53,7 @@ ActiveAdmin.register CattleBreed do
       f.input :title
       f.input :description
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
     end
     f.actions
   end

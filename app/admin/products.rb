@@ -12,16 +12,18 @@ ActiveAdmin.register Product do
     column :description
     column :status
     column :created_by
+    column :updated_by
     column :created_at
     column :updated_at
     actions
   end
 
-  # filter :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
+  filter :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
   filter :title
   filter :description
   filter :status
   filter :created_by
+  filter :updated_by
   filter :created_at
   filter :updated_at
 
@@ -30,8 +32,9 @@ ActiveAdmin.register Product do
       f.input :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
       f.input :title
       f.input :description
-      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :status
+      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
     end
     f.actions
   end

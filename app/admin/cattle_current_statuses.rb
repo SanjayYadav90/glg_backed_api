@@ -68,6 +68,7 @@ ActiveAdmin.register CattleCurrentStatus do
       f.input :calf_consumption
       f.input :description
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
     end
     f.actions
   end

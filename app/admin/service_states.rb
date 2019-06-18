@@ -1,7 +1,7 @@
 ActiveAdmin.register ServiceState do
 
   menu label: proc { I18n.t("admin.service.state.label") }
-  permit_params :admin_user_id, :title, :started_at, :remarks, :created_by, :status
+  permit_params :admin_user_id, :title, :started_at, :created_by, :updated_by, :remarks,  :status
 
   index do
     selectable_column
@@ -20,8 +20,9 @@ ActiveAdmin.register ServiceState do
   # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   filter :title
   filter :started_at
-  filter :remarks
   filter :created_by
+  filter :updated_by
+  filter :remarks
   filter :status
   filter :created_at
   filter :updated_at
@@ -33,6 +34,7 @@ ActiveAdmin.register ServiceState do
       f.input :started_at
       f.input :remarks
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :status
     end
     f.actions
