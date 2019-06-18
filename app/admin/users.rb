@@ -47,7 +47,7 @@ ActiveAdmin.register User do
       f.input :premimum
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
-      f.input :gender, as: :select, :collection => USER_STATUS
+      f.input :status, as: :select, :collection => USER_STATUS
     end
     f.actions
   end

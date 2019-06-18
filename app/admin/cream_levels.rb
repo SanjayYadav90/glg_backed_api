@@ -3,7 +3,7 @@ ActiveAdmin.register CreamLevel do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
   menu priority: 5, label: proc { I18n.t("admin.products.cream_level.label") }, parent: 'Product'
-  permit_params :product_origin_id, :title, :fat_level, :description, :created_by, :status
+  permit_params :product_origin_id, :title, :fat_level, :created_by, :updated_by, :description, :status
 #
 # or
 #
