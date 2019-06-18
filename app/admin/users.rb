@@ -35,7 +35,7 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs do
       f.input :admin_user_id, :input_html => { :value => current_admin_user.id }, as: :hidden
-      f.input :service_state_id, as: :select, collection: ServiceState.all.collect {|ser_state| [ser_state.email, ser_state.id] }
+      f.input :service_state_id, as: :select, collection: ServiceState.all.collect {|ser_state| [ser_state.title, ser_state.id] }
       f.input :salutation, as: :select, :collection => SALUTATION
       f.input :first_name
       f.input :last_name
