@@ -24,7 +24,7 @@ ActiveAdmin.register Cattle do
       f.input :amount
       f.input :tag_no
       f.input :description
-      f.input :parent_cattle_id
+      f.input :parent_cattle_id, as: :select, collection: Cattle.all.collect {|cat| [cat.title, cat.id] }
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
     end
