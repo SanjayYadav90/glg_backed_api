@@ -6,7 +6,6 @@ ActiveAdmin.register CattleCategory do
 
   index do
     selectable_column
-    id_column
     column "Title" do |t|
       t.title.truncate_words(3)
     end
