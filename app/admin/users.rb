@@ -34,11 +34,11 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs do
       f.input :admin_user_id, :input_html => { :value => current_admin_user.id }, as: :hidden
-      f.input :service_state_id, as: :select, collection: ServiceState.all.collect {|ser_state| [ser_state.title, ser_state.id] }
-      f.input :salutation, as: :select, :collection => SALUTATION
+      f.input :service_state_id, :prompt => "Select Service State", as: :select, collection: ServiceState.all.collect {|ser_state| [ser_state.title, ser_state.id] }
+      f.input :salutation, as: :select, :prompt => "Select SALUTATION", :collection => SALUTATION
       f.input :first_name
       f.input :last_name
-      f.input :gender, as: :select, :collection => GENDER
+      f.input :gender, as: :select, :prompt => "Select Gender", :collection => GENDER
       f.input :email
       f.input :mobile
       f.input :password
@@ -47,7 +47,7 @@ ActiveAdmin.register User do
       f.input :premimum
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
-      f.input :status, as: :select, :collection => USER_STATUS
+      f.input :status, as: :select, :prompt => "Select Status", :collection => USER_STATUS
     end
     f.actions
   end

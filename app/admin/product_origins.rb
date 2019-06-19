@@ -39,4 +39,16 @@ ActiveAdmin.register ProductOrigin do
     actions
   end
 
+  form do |f|
+    f.inputs do
+      f.input :category_id , as: :select,:prompt => "Select Category", collection: Category.all.collect {|cat| [cat.title, cat.id] }
+      f.input :title
+      f.input :description
+      f.input :status
+      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+    end
+    f.actions
+  end
+
 end

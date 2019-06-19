@@ -49,7 +49,7 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs do
-      f.input :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
+      f.input :cream_level_id, as: :select, :prompt => "Select Cream Level", collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
       f.input :title
       f.input :description
       f.input :status

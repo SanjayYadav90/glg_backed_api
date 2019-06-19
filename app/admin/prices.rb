@@ -44,4 +44,19 @@ permit_params :product_id, :service_state_id, :title, :price, :description, :cre
     column :updated_at
     actions
   end
+
+  form do |f|
+    f.inputs do
+      f.input :product_id , as: :select,:prompt => "Select Product", collection: Product.all.collect {|pro| [pro.title, pro.id] }
+      f.input :service_state_id, as: :select,:prompt => "Select Service State", collection: ServiceState.all.collect {|s_state| [s_state.title, s_state.id] }
+      f.input :title
+      f.input :price
+      f.input :description
+      f.input :status
+      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+    end
+    f.actions
+  end
+
 end
