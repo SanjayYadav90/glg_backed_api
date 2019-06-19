@@ -1,7 +1,7 @@
 ActiveAdmin.register AdminUser do
 
   menu priority: 1, label: proc { I18n.t("admin.users.admin_user.label") }, parent: 'Profiles'
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :title, :password, :password_confirmation
 
   index do
     selectable_column
