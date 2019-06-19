@@ -59,7 +59,7 @@ ActiveAdmin.register CattleCurrentStatus do
 
   form do |f|
     f.inputs do
-      f.input :cattle_id, as: :select, collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
+      f.input :cattle_id, as: :select, :prompt => "Select Cattle", collection: Cattle.all.collect {|catt| [catt.title, catt.id] }
       f.input :title
       f.input :calf_gender
       f.input :calf_live_status

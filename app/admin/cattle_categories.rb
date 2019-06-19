@@ -47,7 +47,7 @@ ActiveAdmin.register CattleCategory do
 
   form do |f|
     f.inputs do
-      f.input :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+      f.input :admin_user_id, as: :select, :prompt => "Select Vendor", collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
       f.input :title
       f.input :description
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden

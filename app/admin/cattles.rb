@@ -23,6 +23,7 @@ ActiveAdmin.register Cattle do
     column "Created By" do |creat|
       if creat.created_by.present?
         admin = AdminUser.find(creat.created_by)
+        # link_to admin.title, admin_user_path(creat.created_by)
       else
         "Nil"
       end
@@ -30,7 +31,7 @@ ActiveAdmin.register Cattle do
     column "Updated By" do |up|
       if up.updated_by.present?
         admin = AdminUser.find(up.updated_by)
-        link_to admin.title, admin_user_path(up.updated_by)
+        # link_to admin.title, admin_user_path(up.updated_by)
       else
         "Nil"
       end
@@ -53,14 +54,14 @@ ActiveAdmin.register Cattle do
 
   form do |f|
     f.inputs do
-      f.input :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
-      f.input :cattle_variant_id, as: :select, collection: CattleVariant.all.collect {|c_var| [c_var.title, c_var.id] }
+      f.input :admin_user_id, as: :select,:prompt => "Select Vendor", collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+      f.input :cattle_variant_id, as: :select, :prompt => "Select Variant", collection: CattleVariant.all.collect {|c_var| [c_var.title, c_var.id] }
       f.input :title
       f.input :purchase_date
       f.input :amount
       f.input :tag_no
       f.input :description
-      f.input :parent_cattle_id, as: :select, collection: Cattle.all.collect {|cat| [cat.title, cat.id] }
+      f.input :parent_cattle_id, as: :select, :prompt => "Select parent", collection: Cattle.all.collect {|cat| [ "#{cat.title} : #{cat.tag_no}", cat.id ] }
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
       f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
     end

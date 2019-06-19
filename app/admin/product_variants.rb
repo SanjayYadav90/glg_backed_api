@@ -2,7 +2,7 @@ ActiveAdmin.register ProductVariant do
 
   menu priority: 5, label: proc { I18n.t("admin.products.variant.label") }, parent: 'Product'
   
-  permit_params :product_id, :title, :quantity, :used_by, :batch_no, :created_by, :updated_by, :status
+  permit_params :product_id, :title, :quantity, :used_by, :batch_no, :created_by, :updated_by, :description, :status
 
   index do
     selectable_column
@@ -36,6 +36,21 @@ ActiveAdmin.register ProductVariant do
     column :created_at
     column :updated_at
     actions
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :product_id , as: :select,:prompt => "Select Product", collection: Product.all.collect {|pro| [pro.title, pro.id] }
+      f.input :title
+      f.input :quantity
+      f.input :used_by
+      f.input :batch_no
+      f.input :description
+      f.input :status
+      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+    end
+    f.actions
   end
   
 end

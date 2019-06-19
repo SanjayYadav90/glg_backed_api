@@ -47,7 +47,7 @@ ActiveAdmin.register CattleVariant do
 
   form do |f|
     f.inputs do
-      f.input :cattle_breed_id, as: :select, collection: CattleBreed.all.collect {|c_breed| [c_breed.title, c_breed.id] }
+      f.input :cattle_breed_id, as: :select, :prompt => "Select Cattle Breed", collection: CattleBreed.all.collect {|c_breed| [c_breed.title, c_breed.id] }
       f.input :title
       f.input :description
       f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden

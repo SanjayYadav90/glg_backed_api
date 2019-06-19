@@ -1,7 +1,5 @@
 ActiveAdmin.register CreamLevel do
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
+
   menu priority: 3, label: proc { I18n.t("admin.products.cream_level.label") }, parent: 'Product'
   permit_params :product_origin_id, :title, :fat_level, :created_by, :updated_by, :description, :status
 
@@ -38,6 +36,19 @@ ActiveAdmin.register CreamLevel do
     column :created_at
     column :updated_at
     actions
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :product_origin_id, as: :select,:prompt => "Select Product Origin", collection: ProductOrigin.all.collect {|prd_org| [prd_org.title, prd_org.id] }
+      f.input :title
+      f.input :fat_level
+      f.input :description
+      f.input :status
+      f.input :created_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+      f.input :updated_by, :input_html => { :value => current_admin_user.id }, as: :hidden
+    end
+    f.actions
   end
 
 end

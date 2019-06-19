@@ -50,7 +50,7 @@ ActiveAdmin.register ServiceState do
 
   form do |f|
     f.inputs do
-      f.input :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
+      f.input :admin_user_id, as: :select, :prompt => "Select Vendor", collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
       f.input :title
       f.input :started_at
       f.input :remarks
