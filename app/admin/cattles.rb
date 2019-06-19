@@ -4,6 +4,42 @@ ActiveAdmin.register Cattle do
 	
   permit_params :admin_user_id, :cattle_variant_id, :title, :purchase_date, :amount, :tag_no, :parent_cattle_id, :created_by, :updated_by, :description
 
+  index do
+    selectable_column
+    column :title
+    column "Cattle Variant" do |c_var|
+      if c_var.cattle_variant_id.present?
+        CattleVariant.find(c_var.cattle_variant_id)
+      else
+        "Nil"
+      end
+    end
+    column :purchase_date
+    column :amount
+    column :tag_no
+    column "Description" do |desc|
+      desc.description.truncate_words(5)
+    end
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end
+    column :created_at
+    column :updated_at
+    actions
+  end
+
   # filter :admin_user_id, as: :select, collection: AdminUser.all.collect {|adm_usr| [adm_usr.email, adm_usr.id] }
   # filter :cattle_variant_id, as: :select, collection: CattleVariant.all.collect {|c_var| [c_var.title, c_var.id] }
   filter :title

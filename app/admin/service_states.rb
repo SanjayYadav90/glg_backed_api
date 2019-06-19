@@ -5,12 +5,33 @@ ActiveAdmin.register ServiceState do
 
   index do
     selectable_column
-    id_column
-    column :admin_user_id
     column :title
+    column "User" do |adm_usr|
+      if adm_usr.admin_user_id.present?
+        AdminUser.find(adm_usr.admin_user_id)
+      else
+        "Nil"
+      end
+    end
     column :started_at
-    column :remarks
-    column :created_by
+    column "Remarks" do |desc|
+      desc.remarks.truncate_words(5)
+    end
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end
     column :status
     column :created_at
     column :updated_at

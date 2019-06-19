@@ -2,15 +2,42 @@ ActiveAdmin.register CreamLevel do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-  menu priority: 5, label: proc { I18n.t("admin.products.cream_level.label") }, parent: 'Product'
+  menu priority: 3, label: proc { I18n.t("admin.products.cream_level.label") }, parent: 'Product'
   permit_params :product_origin_id, :title, :fat_level, :created_by, :updated_by, :description, :status
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
+  index do
+    selectable_column
+    column :title
+    column "Product Origin" do |p_org|
+      if p_org.product_origin_id.present?
+        ProductOrigin.find(p_org.product_origin_id)
+      else
+        "Nil"
+      end
+    end
+    column :fat_level
+    column "Description" do |desc|
+      desc.description.truncate_words(5)
+    end
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end
+    column :status
+    column :created_at
+    column :updated_at
+    actions
+  end
 
 end

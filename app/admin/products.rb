@@ -6,13 +6,33 @@ ActiveAdmin.register Product do
 
   index do
     selectable_column
-    id_column
-    column :cream_level_id
     column :title
-    column :description
+    column "Cream Level" do |cr_lev|
+      if cr_lev.cream_level_id.present?
+        CreamLevel.find(cr_lev.cream_level_id)
+      else
+        "Nil"
+      end
+    end
+    column "Description" do |desc|
+      desc.description.truncate_words(5)
+    end
+    column "Created By" do |creat|
+      if creat.created_by.present?
+        admin = AdminUser.find(creat.created_by)
+      else
+        "Nil"
+      end
+    end
+    column "Updated By" do |up|
+      if up.updated_by.present?
+        admin = AdminUser.find(up.updated_by)
+        link_to admin.title, admin_user_path(up.updated_by)
+      else
+        "Nil"
+      end
+    end
     column :status
-    column :created_by
-    column :updated_by
     column :created_at
     column :updated_at
     actions

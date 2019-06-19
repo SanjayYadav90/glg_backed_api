@@ -5,12 +5,21 @@ ActiveAdmin.register AdminUser do
 
   index do
     selectable_column
-    id_column
     column :title
     column :email
+    column "Service State" do |s_state|
+      if s_state.service_state_id.present?
+        ServiceState.find(s_state.service_state_id)
+      else
+        "Nil"
+      end
+    end
+    column :role
+    column :current_sign_in_ip
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
+    column :updated_at
     actions
   end
 
