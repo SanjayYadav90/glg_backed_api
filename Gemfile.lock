@@ -92,6 +92,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
+    connection_pool (2.2.2)
     crass (1.0.4)
     devise (4.6.2)
       bcrypt (~> 3.0)
@@ -200,6 +201,12 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    react-rails (2.5.0)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     regexp_parser (1.5.1)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -276,6 +283,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   puma (~> 3.11)
   rails (~> 5.2.3)
+  react-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -288,3 +296,5 @@ DEPENDENCIES
 RUBY VERSION
    ruby 2.6.3p62
 
+BUNDLED WITH
+   1.17.2
