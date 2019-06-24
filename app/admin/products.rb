@@ -38,7 +38,7 @@ ActiveAdmin.register Product do
     actions
   end
 
-  filter :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
+  # filter :cream_level_id, as: :select, collection: CreamLevel.all.collect {|cream| [cream.title, cream.id] }
   filter :title
   filter :description
   filter :status
